@@ -4,4 +4,8 @@ export default {
   path: '/about',
   name: 'about',
   component: About,
+  meta: {
+    title: '关于',
+    icon: 'ioshome',
+  },
 };
