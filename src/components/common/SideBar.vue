@@ -8,14 +8,19 @@ export default class SideBar extends Vue {
     const routes = router.options.routes;
     const dom = this.recursion(routes, '0');
     return (
-      <el-aside width='240px'>
+      <el-aside width='auto'>
         <el-menu
+          collapse={false}
           active-text-color='#fff'
           background-color='#001529'
           text-color='hsla(0,0%,100%,.65)'
           default-active={this.$route.meta.light || this.$route.path}
           class='el-menu-vertical-demo'
           router>
+          <div class='menu-header'>
+            <i class="iconfont icon-ioshome"></i>
+            <p>Vue-TypeScript</p>
+          </div>
           {dom}
         </el-menu>
       </el-aside>
@@ -23,7 +28,7 @@ export default class SideBar extends Vue {
   }
   public recursion(routes: any, index: string) {
     const mianMenus = routes.map((route: any, subIndex: string) => {
-      const icon = `iconfont icon-${route.meta.icon}`;
+      const icon = `iconfont icon-${route.meta.icon} icon-style`;
       let dom;
       if (!route.children || route.meta.showChildren === false) {
         dom = (
@@ -57,31 +62,74 @@ export default class SideBar extends Vue {
 </script>
 
 <style scoped lang="less">
-@TenderGreen: #42b983;
+@import "../../assets/less/style";
 
 .el-aside {
   min-height: 100vh;
-  background: #001529;
+  background: @background-deep-blue;
   box-shadow: 2px 0 6px rgba(0,21,41,.35);
   &>ul {
-    padding: 16px 0px;
+    padding: 0;
     width: 100%;
     border: none;
   }
 }
-.el-submenu__title {
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 240px;
+}
+.el-menu-vertical-demo.el-menu--collapse {
+  .menu-header {
+    p {
+      width: 0;
+      overflow: hidden;
+    }
+  }
+}
+.el-submenu /deep/ .el-submenu__title {
   &:hover {
-    color: @TenderGreen!important;
+   color: @tender-green!important;
+  }
+}
+.el-submenu {
+  &.is-active /deep/ .el-submenu__title {
+    color: @tender-green!important;
+  }
+  .el-menu-item {
+    background-color: @background-black-blue!important;
   }
 }
 .el-menu-item {
   height: 40px;
   line-height: 40px;
   &:hover {
-    color: @TenderGreen!important;
+    color: @tender-green!important;
   }
   &.is-active {
-    background-color: #1890ff!important;
+    background-color: @background-blue!important;
+    color: #fff!important;
   }
+}
+.menu-header {
+  display: flex;
+  // justify-content: center;
+  align-content: center;
+  color: #fff;
+  height: 54px;
+  padding-left: 16px;
+  line-height: 54px;
+  font-size: @font-size-main-title;
+  background-color: @background-dark-blue;
+  font-weight: 600;
+  i {
+    font-size: @font-size-large-title;
+    margin: -1px 10px 0 0;
+  }
+  p {
+    margin: 0;
+    transition: all .3s;
+  }
+}
+.icon-style {
+  margin-right: 10px;
 }
 </style>
