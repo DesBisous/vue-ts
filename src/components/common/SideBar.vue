@@ -57,9 +57,29 @@ export default class SideBar extends Vue {
 </script>
 
 <style scoped lang="less">
+@TenderGreen: #42b983;
+
+.el-aside {
+  min-height: 100vh;
+  background: #001529;
+  box-shadow: 2px 0 6px rgba(0,21,41,.35);
+  &>ul {
+    padding: 16px 0px;
+    width: 100%;
+    border: none;
+  }
+}
+.el-submenu__title {
+  &:hover {
+    color: @TenderGreen!important;
+  }
+}
 .el-menu-item {
   height: 40px;
   line-height: 40px;
+  &:hover {
+    color: @TenderGreen!important;
+  }
   &.is-active {
     background-color: #1890ff!important;
   }
