@@ -1,5 +1,3 @@
-import About from '../../views/About.vue';
-
 export default {
   path: '/user',
   name: 'user',
@@ -16,7 +14,11 @@ export default {
     {
       path: '/user/userList',
       name: 'userList',
-      component: About,
+      template: `
+        <div>
+            用户列表
+        </div>
+      `,
       meta: {
         title: '用户列表',
         icon: 'ioshome',
@@ -25,7 +27,11 @@ export default {
     {
       path: '/user/userChart',
       name: 'userChart',
-      component: About,
+      template: `
+        <div>
+            用户图示化
+        </div>
+      `,
       meta: {
         title: '用户图示化',
         icon: 'ioshome',

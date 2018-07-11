@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import home from './modules/home';
 import about from './modules/about';
 import user from './modules/user';
+import exception from './modules/exception';
 
 Vue.use(Router);
 
@@ -11,5 +12,6 @@ export default new Router({
     home,
     about,
     user,
+    exception,
   ],
 });
