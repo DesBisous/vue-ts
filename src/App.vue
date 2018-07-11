@@ -2,8 +2,8 @@
   <div id="app">
     <el-container>
       <SideBar></SideBar>
-      <el-container>
-        <el-header>Header</el-header>
+      <el-container direction='vertical'>
+        <TopBar/>
         <el-main>
           <router-view/>
         </el-main>
@@ -15,10 +15,12 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import SideBar from '@/components/common/SideBar.vue';
+import TopBar from '@/components/common/TopBar.vue';
 
 @Component({
   components: {
     SideBar,
+    TopBar,
   },
 })
 export default class App extends Vue {}
@@ -26,6 +28,7 @@ export default class App extends Vue {}
 
 <style lang="less">
 @import './assets/less/common.less';
+@import './assets/less/style.less';
 
 html {
   width: 100%;
@@ -41,5 +44,8 @@ body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased; // 字体抗锯齿渲染
   -moz-osx-font-smoothing: grayscale; // 字体抗锯齿渲染
+}
+.el-main {
+  background-color: @background-gray;
 }
 </style>
