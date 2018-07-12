@@ -2,7 +2,7 @@
   <div id="app">
     <el-container>
       <SideBar></SideBar>
-      <el-container direction='vertical'>
+      <el-container direction='vertical' class='container'>
         <TopBar/>
         <el-main>
           <router-view/>
@@ -44,8 +44,12 @@ body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased; // 字体抗锯齿渲染
   -moz-osx-font-smoothing: grayscale; // 字体抗锯齿渲染
+  letter-spacing: .45px;
 }
 .el-main {
   // background-color: @background-gray;
+}
+.container {
+  background-color: @background-gray;
 }
 </style>

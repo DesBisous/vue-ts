@@ -22,7 +22,7 @@ export default class SideBar extends Vue {
           router>
           <div class='menu-header'>
             <i class='iconfont icon-ioshome'></i>
-            <p>Vue-TypeScript</p>
+            <p>Vue TypeScript</p>
           </div>
           {dom}
         </el-menu>
@@ -100,6 +100,8 @@ aside {
   }
   .el-menu-item {
     background-color: @background-black-blue!important;
+    height: 40px;
+    line-height: 40px;
   }
 }
 .el-menu-item {
