@@ -1,8 +1,11 @@
 <script lang="tsx">
 import { Component, Vue } from 'vue-property-decorator';
+import { Getter } from 'vuex-class';
 
 @Component
 export default class SideBar extends Vue {
+  @Getter('sideBar/collapse') private collapse: any;
+
   public render() {
     const router: any = this.$router;
     const routes = router.options.routes;
@@ -10,7 +13,7 @@ export default class SideBar extends Vue {
     return (
       <el-aside width='auto'>
         <el-menu
-          collapse={false}
+          collapse={this.collapse}
           active-text-color='#fff'
           background-color='#001529'
           text-color='hsla(0,0%,100%,.65)'
@@ -18,7 +21,7 @@ export default class SideBar extends Vue {
           class='el-menu-vertical-demo'
           router>
           <div class='menu-header'>
-            <i class="iconfont icon-ioshome"></i>
+            <i class='iconfont icon-ioshome'></i>
             <p>Vue-TypeScript</p>
           </div>
           {dom}
