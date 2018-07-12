@@ -46,6 +46,6 @@ body {
   -moz-osx-font-smoothing: grayscale; // 字体抗锯齿渲染
 }
 .el-main {
-  background-color: @background-gray;
+  // background-color: @background-gray;
 }
 </style>

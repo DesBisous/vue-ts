@@ -11,7 +11,7 @@ export default class SideBar extends Vue {
     const routes = router.options.routes;
     const dom = this.recursion(routes, '0');
     return (
-      <el-aside width='auto'>
+      <aside>
         <el-menu
           collapse={this.collapse}
           active-text-color='#fff'
@@ -26,7 +26,7 @@ export default class SideBar extends Vue {
           </div>
           {dom}
         </el-menu>
-      </el-aside>
+      </aside>
     );
   }
   public recursion(routes: any, index: string) {
@@ -67,13 +67,14 @@ export default class SideBar extends Vue {
 <style scoped lang="less">
 @import "../../assets/less/style";
 
-.el-aside {
+aside {
   min-height: 100vh;
   background: @background-deep-blue;
   box-shadow: 2px 0 6px rgba(0,21,41,.35);
   &>ul {
     padding: 0;
     width: 100%;
+    height: 100%;
     border: none;
   }
 }
@@ -117,9 +118,9 @@ export default class SideBar extends Vue {
   // justify-content: center;
   align-content: center;
   color: #fff;
-  height: 54px;
+  height: 60px;
   padding-left: 16px;
-  line-height: 54px;
+  line-height: 60px;
   font-size: @font-size-main-title;
   background-color: @background-dark-blue;
   font-weight: 600;
