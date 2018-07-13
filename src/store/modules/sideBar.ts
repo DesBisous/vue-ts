@@ -5,7 +5,7 @@ interface State {
 }
 
 const state: State = {
-  collapse: true,
+  collapse: false,
 };
 
 // 计算属性

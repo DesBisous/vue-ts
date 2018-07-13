@@ -21,7 +21,7 @@ export default class SideBar extends Vue {
           class='el-menu-vertical-demo'
           router>
           <div class='menu-header'>
-            <i class='iconfont icon-ioshome'></i>
+            <i class='iconfont icon-androidboat'></i>
             <p>Vue TypeScript</p>
           </div>
           {dom}
@@ -127,7 +127,7 @@ aside {
   background-color: @background-dark-blue;
   font-weight: 600;
   i {
-    font-size: @font-size-large-title;
+    font-size: @font-size-slarge-title;
     margin: -1px 10px 0 0;
   }
   p {

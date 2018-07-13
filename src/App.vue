@@ -5,6 +5,13 @@
       <el-container direction='vertical' class='container'>
         <TopBar/>
         <el-main>
+          <div class="breadcrumb">
+            <el-breadcrumb separator="/">
+              <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+              <el-breadcrumb-item :to="{ path: '/' }">用户管理</el-breadcrumb-item>
+              <el-breadcrumb-item :to="{ path: '/' }">用户列表</el-breadcrumb-item>
+            </el-breadcrumb>
+          </div>
           <router-view/>
         </el-main>
       </el-container>
@@ -51,5 +58,22 @@ body {
 }
 .container {
   background-color: @background-gray;
+}
+.breadcrumb {
+  margin-bottom: 16px;
+  .is-link {
+    color: @font-color-base!important;
+    font-weight: 500!important;
+    &:hover {
+      color: @tender-green!important;
+    }
+  }
+  .el-breadcrumb__item {
+    &:last-child {
+      .is-link {
+        color: @font-color-base!important;
+      }
+    }
+  }
 }
 </style>

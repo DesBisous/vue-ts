@@ -3,7 +3,9 @@
     <i class="icon-switch iconfont" :class="collapse ? 'icon-ribbona' : 'icon-ribbonb'" @click="modifyCollapse"></i>
     <div class="right-block">
       <div class="chat">
-        <i class="iconfont icon-androidchat"></i>
+        <el-tooltip effect="dark" content="聊天" placement="bottom">
+          <i class="iconfont icon-androidchat"></i>
+        </el-tooltip>
       </div>
       <div class="message">
           <i class="iconfont icon-androidnotifications">
@@ -11,8 +13,27 @@
           </i>
       </div>
       <div class="user">
-        <img src="../../../public/images/user.jpg" alt="">
-        <strong>金所炫</strong>
+        <el-dropdown>
+          <div class="el-dropdown-link">
+            <img src="../../../public/images/user.jpg" alt="">
+            <strong>金所炫</strong>
+          </div>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>
+              <i class="iconfont icon-androidcontact"></i>
+              个人中心
+            </el-dropdown-item>
+            <el-dropdown-item>
+              <i class="iconfont icon-androidchat"></i>
+              聊天室
+            </el-dropdown-item>
+            <el-dropdown-item>
+              邮件
+            </el-dropdown-item>
+            <el-dropdown-item disabled>双皮奶</el-dropdown-item>
+            <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
       </div>
     </div>
   </el-header>
@@ -50,6 +71,7 @@ export default class TopBar extends Vue {
   float: left;
   padding: 0 16px;
   color: @font-color-base;
+  cursor: pointer;
   &:hover {
     color: @purple;
   }
@@ -59,17 +81,20 @@ export default class TopBar extends Vue {
   .user {
     padding: 0 0 0 16px;
     height: 100%;
-    display: flex;
-    align-items: center;
     float: left;
+    .el-dropdown-link {
+      align-items: center;
+      display: flex;
+    }
     img {
-      width: 38px;
-      height: 38px;
+      width: 35px;
+      height: 35px;
       border-radius: 50%;
       overflow: hidden;
     }
     strong {
-      margin: 0 8px;
+      font-size: @font-size-base-text;
+      margin: 0 8px 0 16px;
       color: @font-color-base;
     }
   }
