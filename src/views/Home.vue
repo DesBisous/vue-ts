@@ -87,9 +87,12 @@ export default class Home extends Vue {
        display: flex;
        align-items: center;
        margin: 0 16px;
-       padding-right: 12px;
        height: 100%;
        border-radius: 6px;
+       box-shadow: @shadow-last;
+       &:hover {
+         box-shadow: @shadow-min;
+       }
        i {
          display: inline-block;
          width: 40%;
@@ -100,19 +103,16 @@ export default class Home extends Vue {
        }
        .details {
          flex: auto; // 等于1 1 auto
-         background-color: #fff;
+         background-color: transparent;
          height: 100%;
-         color: @font-color-main;
+         color: #fff;
          padding: 8px 16px;
          box-sizing: border-box;
-         background-color: @background-gray;
          h2 {
            margin: 12px 0 0 0;
-           color: @font-color-main;
          }
          p {
            font-size: @font-size-base-text;
-           color: @font-color-second;
            overflow: hidden;
            text-overflow: ellipsis;
            white-space: nowrap;

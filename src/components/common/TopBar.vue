@@ -56,7 +56,7 @@ export default class TopBar extends Vue {
 .el-header {
   line-height: 60px;
   padding: 0 20px 0 0;
-  box-shadow: 2px 0 6px rgba(0,21,41,.35);
+  box-shadow: @shadow-min;
   background-color: #fff;
   display: flex;
   align-items: center;

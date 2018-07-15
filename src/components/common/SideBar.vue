@@ -70,7 +70,7 @@ export default class SideBar extends Vue {
 aside {
   min-height: 100vh;
   background: @background-deep-blue;
-  box-shadow: 2px 0 6px rgba(0,21,41,.35);
+  box-shadow: @shadow-min;
   &>ul {
     padding: 0;
     width: 100%;
