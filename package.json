@@ -11,6 +11,8 @@
     "test:e2e": "vue-cli-service test:e2e"
   },
   "dependencies": {
+    "@types/echarts": "^0.0.13",
+    "echarts": "^4.1.0",
     "element-ui": "^2.4.3",
     "vue": "^2.5.16",
     "vue-class-component": "^6.0.0",
