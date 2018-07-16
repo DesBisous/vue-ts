@@ -297,6 +297,7 @@ export default class Home extends Vue {
   }
 
   protected mounted() {
+    console.log(this);
     this.initChartsBar();
     this.initChartsPie();
     window.addEventListener('resize', () => {

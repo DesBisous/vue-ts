@@ -742,6 +742,10 @@
   version "9.6.23"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.23.tgz#fc429962c1b75f32bd66214a3997f660e8434f0d"
 
+"@types/qs@^6.5.1":
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/@types/qs/-/qs-6.5.1.tgz#a38f69c62528d56ba7bd1f91335a8004988d72f7"
+
 "@types/sinon-chai@2.7.29":
   version "2.7.29"
   resolved "https://registry.yarnpkg.com/@types/sinon-chai/-/sinon-chai-2.7.29.tgz#4db01497e2dd1908b2bd30d1782f456353f5f723"
