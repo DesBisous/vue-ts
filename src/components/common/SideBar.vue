@@ -1,12 +1,31 @@
 <script lang="tsx">
 import { Component, Vue } from 'vue-property-decorator';
-import { Getter } from 'vuex-class';
+import { Action, Getter } from 'vuex-class';
 
 @Component
 export default class SideBar extends Vue {
   @Getter('sideBar/collapse') private collapse: any;
+  @Action('sideBar/setCollapse') private setCollapse: any;
+  private timeoutId: any = null;
 
-  public render() {
+  protected mounted() {
+    if (document.body.clientWidth < 1220) {
+      this.setCollapse(true);
+    }
+    window.addEventListener('resize', () => {
+      if (this.timeoutId) {
+        clearTimeout(this.timeoutId);
+      }
+      this.timeoutId = setTimeout(() => {
+        if (document.body.clientWidth < 1220) {
+          this.setCollapse(true);
+        } else {
+          this.setCollapse(false);
+        }
+      }, 500);
+    }, false);
+  }
+  protected render() {
     const router: any = this.$router;
     const routes = router.options.routes;
     const dom = this.recursion(routes, '0');
@@ -29,7 +48,7 @@ export default class SideBar extends Vue {
       </aside>
     );
   }
-  public recursion(routes: any, index: string) {
+  protected recursion(routes: any, index: string) {
     const mianMenus = routes.map((route: any, subIndex: string) => {
       const icon = `iconfont icon-${route.meta.icon} icon-style`;
       let dom;

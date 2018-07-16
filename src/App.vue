@@ -54,7 +54,7 @@ body {
   letter-spacing: .45px;
 }
 .el-main {
-  // background-color: @background-gray;
+  min-width: 500px;
 }
 .container {
   background-color: @background-gray;

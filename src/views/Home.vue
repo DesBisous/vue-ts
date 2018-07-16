@@ -125,6 +125,9 @@ export default class Home extends Vue {
   private topList: any[] = [];
   private pickerOptions: any = {};
   private timeValue: any[] = [];
+  private barChart: any = null;
+  private pieChart: any = null;
+  private timeoutId: any = null;
 
   constructor() {
     super();
@@ -180,7 +183,8 @@ export default class Home extends Vue {
   }
 
   protected initChartsBar() {
-    echarts.init(this.$refs.bar as HTMLDivElement).setOption({
+    this.barChart = echarts.init(this.$refs.bar as HTMLDivElement);
+    this.barChart.setOption({
         title: {
           subtext: '用户活跃度',
         },
@@ -239,7 +243,8 @@ export default class Home extends Vue {
   }
 
   protected initChartsPie() {
-    echarts.init(this.$refs.pie as HTMLDivElement).setOption({
+    this.pieChart = echarts.init(this.$refs.pie as HTMLDivElement);
+    this.pieChart.setOption({
         title: {
           subtext: '纯属虚构',
         },
@@ -286,9 +291,20 @@ export default class Home extends Vue {
     });
   }
 
+  protected Repaint() {
+    this.barChart.resize();
+    this.pieChart.resize();
+  }
+
   protected mounted() {
     this.initChartsBar();
     this.initChartsPie();
+    window.addEventListener('resize', () => {
+      if (this.timeoutId) {
+        clearTimeout(this.timeoutId);
+      }
+      this.timeoutId = setTimeout(this.Repaint, 500);
+    }, false);
   }
 }
 </script>
@@ -298,30 +314,35 @@ export default class Home extends Vue {
 .top {
   display: flex;
   align-items: center;
-  height: 135px;
   .top-img {
     box-sizing: border-box;
     padding: 8px;
     width: 8%;
+    min-width: 84px;
     flex-grow: 0; // 不放大
+    @media (max-width: 1062px) {
+      display: none;
+    }
     img {
       width: 100%;
     }
   }
   .top-item{
-    flex-grow: 1; // 放大
+    flex: auto; // 放大
     height: 100%;
+    width: 92%;
     ul{
      display: flex;
      align-items: center;
      height: 100%;
      box-sizing: border-box;
-     padding: 16px 0;
+     padding: 16px 0 0;
+     flex-wrap: wrap;
      li {
        flex: auto; // 等于1 1 auto
        display: flex;
        align-items: center;
-       margin: 0 16px;
+       margin: 0 16px 16px;
        height: 100%;
        border-radius: 6px;
        box-shadow: @shadow-last;
@@ -382,6 +403,7 @@ export default class Home extends Vue {
       float: right;
       .date-picker {
         margin-left: 8px;
+        margin-bottom: 16px;
       }
       span {
         cursor: pointer;
