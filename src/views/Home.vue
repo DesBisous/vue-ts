@@ -118,6 +118,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import user from '@/api/user';
 import echarts from 'echarts';
 
 @Component
@@ -296,8 +297,12 @@ export default class Home extends Vue {
     this.pieChart.resize();
   }
 
+  protected async findAllUser() {
+    const res = await user.findAllUser();
+    console.log(res);
+  }
+
   protected mounted() {
-    console.log(this);
     this.initChartsBar();
     this.initChartsPie();
     window.addEventListener('resize', () => {
@@ -306,6 +311,7 @@ export default class Home extends Vue {
       }
       this.timeoutId = setTimeout(this.Repaint, 500);
     }, false);
+    this.findAllUser();
   }
 }
 </script>

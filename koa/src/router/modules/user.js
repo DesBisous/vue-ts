@@ -6,8 +6,9 @@ const user =  async (ctx, next) => {
   ctx.response.body = '<h1>Hello, koa2!</h1>';
 };
 
-const SearchAllUser =  async (ctx, next) => {
+const findAllUser =  async (ctx, next) => {
   const users = await User.findAll();
+  ctx.response.status = 200;
   ctx.response.type = 'application/json';
   if (users) {
     ctx.response.body = JSON.stringify(users);
@@ -24,7 +25,7 @@ module.exports = [
     },
     {
       method: 'GET',
-      path: '/SearchAllUser',
-      func: SearchAllUser
+      path: '/findAllUser',
+      func: findAllUser
     },
 ]

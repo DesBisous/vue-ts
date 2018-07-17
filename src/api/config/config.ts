@@ -1,6 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
-import router from '../router';
+import router from '@/router';
 
 export const getToken = () => {
   const token = window.localStorage.token;
@@ -10,21 +10,18 @@ export const getToken = () => {
   return null;
 };
 
-const requestHeaders = {
-  'Accept': 'application/json;charset=UTF-8',
-  'Content-Type': 'application/json;charset=UTF-8',
-};
-
 // 全局配置
 axios.defaults.timeout = 3000;
 axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? 'http://127.0.0.0:3000/' : 'http://localhost:3000/';
-// axios.defaults.headers.post['Accept'] = 'application/json;charset=UTF-8';
-// axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
+axios.defaults.headers.post['Accept'] = 'application/json;charset=UTF-8';
+axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 
 // http request 拦截器
 axios.interceptors.request.use(
   (config: any) => {
-    config.headers['X-User-Token'] = getToken();
+    if (getToken()) {
+      config.headers['X-User-Token'] = getToken();
+    }
     if (config.method  === 'post') {
       config.data = qs.stringify(config.data);
     }
@@ -37,8 +34,11 @@ axios.interceptors.request.use(
 
 // http response 拦截器
 axios.interceptors.response.use(
-  (response: any) => response,
+  (response: any) => {
+    return response;
+  },
   (error: any) => {
+    // 根据后台返回的状态，能够拿到状态值，通过 error.response.status
     if (error.response) {
       switch (error.response.status) {
         case 401:
