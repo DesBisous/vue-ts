@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosStatic, AxiosResponse, AxiosRequestConfig } from 'axios';
 import qs from 'qs';
 import router from '@/router';
 
@@ -27,7 +27,7 @@ axios.interceptors.request.use(
     }
     return config;
   },
-  (err: any) => {
+  (err?: ((err: any) => any) | undefined) => {
     return Promise.reject(err);
   },
 );
