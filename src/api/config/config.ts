@@ -1,4 +1,4 @@
-import axios, { AxiosStatic, AxiosResponse, AxiosRequestConfig } from 'axios';
+import axios, { AxiosResponse, AxiosRequestConfig, AxiosError } from 'axios';
 import qs from 'qs';
 import router from '@/router';
 
@@ -18,7 +18,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 
 // http request 拦截器
 axios.interceptors.request.use(
-  (config: any) => {
+  (config: AxiosRequestConfig) => {
     if (getToken()) {
       config.headers['X-User-Token'] = getToken();
     }
@@ -27,20 +27,20 @@ axios.interceptors.request.use(
     }
     return config;
   },
-  (err?: ((err: any) => any) | undefined) => {
+  (err: AxiosError) => {
     return Promise.reject(err);
   },
 );
 
 // http response 拦截器
 axios.interceptors.response.use(
-  (response: any) => {
+  (response: AxiosResponse) => {
     return response;
   },
-  (error: any) => {
-    // 根据后台返回的状态，能够拿到状态值，通过 error.response.status
-    if (error.response) {
-      switch (error.response.status) {
+  (err: AxiosError) => {
+    // 根据后台返回的状态，能够拿到状态值，通过 err.response.status
+    if (err.response) {
+      switch (err.response.status) {
         case 401:
           // 401 清除token信息并跳转到登录页面
           window.localStorage.removeItem('token');
@@ -48,7 +48,7 @@ axios.interceptors.response.use(
         default: break;
       }
     }
-    return Promise.reject(error);
+    return Promise.reject(err);
   },
 );
 

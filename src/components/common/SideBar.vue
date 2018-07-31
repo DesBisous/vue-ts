@@ -1,11 +1,13 @@
 <script lang="tsx">
 import { Component, Vue } from 'vue-property-decorator';
 import { Action, Getter } from 'vuex-class';
+import { State } from '../../store/modules/sideBar';
+import { Router } from '../../interface/router';
 
 @Component
 export default class SideBar extends Vue {
-  @Getter('sideBar/collapse') private collapse: any;
-  @Action('sideBar/setCollapse') private setCollapse: any;
+  @Getter('sideBar/collapse') private collapse?: boolean;
+  @Action('sideBar/setCollapse') private setCollapse!: (val: boolean) => void;
   private timeoutId: any = null;
 
   protected mounted() {
@@ -48,8 +50,8 @@ export default class SideBar extends Vue {
       </aside>
     );
   }
-  protected recursion(routes: any, index: string) {
-    const mianMenus = routes.map((route: any, subIndex: string) => {
+  protected recursion(routes: Router[], index: string): any[] {
+    const mianMenus = routes.map((route: Router, subIndex: string | number) => {
       const icon = `iconfont icon-${route.meta.icon} icon-style`;
       let dom;
       if (!route.children || route.meta.showChildren === false) {

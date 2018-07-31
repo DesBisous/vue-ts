@@ -1,7 +1,8 @@
 import { Commit } from 'vuex';
+import User from '../../interface/user';
 
 interface State {
-  user: any;
+  user: User;
 }
 
 const state: State = {
@@ -15,7 +16,7 @@ const getters = {
 
 // 提交mutation
 const actions = {
-  setUser(context: { commit: Commit, state: State }, user: any) {
+  setUser(context: { commit: Commit, state: State }, user: User) {
     context.commit('setUser', user);
   },
   removeUser(context: { commit: Commit, state: State }) {
@@ -25,7 +26,7 @@ const actions = {
 
 // 更改状态
 const mutations = {
-  setUser(state: State, user: any) {
+  setUser(state: State, user: User) {
     state.user = user;
   },
   removeUser(state: State) {

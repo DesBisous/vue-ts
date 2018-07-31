@@ -118,13 +118,22 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import user from '@/api/user';
 import echarts from 'echarts';
+import { DatePickerOptions } from 'element-ui/types/date-picker';
+import user from '../api/user';
+
+interface Category {
+  title: string;
+  desc: string;
+  icon: string;
+}
+
+type Categorys = Category[];
 
 @Component
 export default class Home extends Vue {
-  private topList: any[] = [];
-  private pickerOptions: any = {};
+  private topList: Categorys;
+  private pickerOptions: DatePickerOptions;
   private timeValue: any[] = [];
   private barChart: any = null;
   private pieChart: any = null;

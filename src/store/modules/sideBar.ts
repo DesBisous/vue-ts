@@ -1,6 +1,6 @@
 import { Commit } from 'vuex';
 
-interface State {
+export interface State {
   collapse: boolean;
 }
 
@@ -13,7 +13,7 @@ const getters = {
   collapse: (state: State) => state.collapse,
 };
 
-// 提交mutation
+// actions
 const actions = {
   modifyCollapse(context: { commit: Commit, state: State }) {
     context.commit('modifyCollapse');

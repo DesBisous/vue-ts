@@ -14,5 +14,5 @@ export default new Vuex.Store({
     sideBar,
   },
   strict: debug,
-  plugins: [createLogger({})],
+  plugins: debug ? [createLogger({})] : [],
 });

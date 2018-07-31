@@ -45,8 +45,8 @@ import { Action, Getter } from 'vuex-class';
 
 @Component
 export default class TopBar extends Vue {
-  @Action('sideBar/modifyCollapse') private modifyCollapse: any;
-  @Getter('sideBar/collapse') private collapse: any;
+  @Action('sideBar/modifyCollapse') private modifyCollapse!: () => void;
+  @Getter('sideBar/collapse') private collapse?: boolean;
 }
 </script>
 
