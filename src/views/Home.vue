@@ -118,7 +118,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import echarts from 'echarts';
+import echarts, { ECharts } from 'echarts';
 import { DatePickerOptions } from 'element-ui/types/date-picker';
 import user from '../api/user';
 
@@ -134,9 +134,9 @@ type Categorys = Category[];
 export default class Home extends Vue {
   private topList: Categorys;
   private pickerOptions: DatePickerOptions;
-  private timeValue: any[] = [];
-  private barChart: any = null;
-  private pieChart: any = null;
+  private timeValue: string[] = [];
+  private barChart: ECharts | null = null;
+  private pieChart: ECharts | null = null;
   private timeoutId: any = null;
 
   constructor() {
@@ -302,8 +302,10 @@ export default class Home extends Vue {
   }
 
   protected Repaint() {
-    this.barChart.resize();
-    this.pieChart.resize();
+    if (this.barChart && this.pieChart) {
+      this.barChart.resize();
+      this.pieChart.resize();
+    }
   }
 
   protected async findAllUser() {
@@ -320,7 +322,7 @@ export default class Home extends Vue {
       }
       this.timeoutId = setTimeout(this.Repaint, 500);
     }, false);
-    this.findAllUser();
+    // this.findAllUser();
   }
 }
 </script>

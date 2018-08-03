@@ -9,6 +9,7 @@ export default interface User {
   email?: string | null;
   address?: string | null;
   profession?: string | null;
+  url?: string;
   state?: number | null;
   createDate?: string;
   updateDate?: string;

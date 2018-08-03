@@ -46,9 +46,10 @@ body {
   min-height: 100vh!important;
   margin: 0!important;
   padding: 0;
+  color: @font-color-main!important;
 }
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: @Georgia;
   -webkit-font-smoothing: antialiased; // 字体抗锯齿渲染
   -moz-osx-font-smoothing: grayscale; // 字体抗锯齿渲染
   letter-spacing: .45px;

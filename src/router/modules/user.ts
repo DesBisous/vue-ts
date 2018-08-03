@@ -1,11 +1,10 @@
+import Template from '../../components/common/Template.vue';
+import UserList from '../../views/user/UserList.vue';
+
 export default {
   path: '/user',
   name: 'user',
-  template: `
-    <div>
-        <router-view></router-view>
-    </div>
-  `,
+  component: Template,
   meta: {
     title: '用户管理',
     icon: 'ioshome',
@@ -14,11 +13,7 @@ export default {
     {
       path: '/user/userList',
       name: 'userList',
-      template: `
-        <div>
-            用户列表
-        </div>
-      `,
+      component: UserList,
       meta: {
         title: '用户列表',
         icon: 'ioshome',
