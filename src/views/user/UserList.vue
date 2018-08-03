@@ -6,6 +6,8 @@
         <el-row :gutter="32">
           <el-col :span="6" v-for="(user, index) in userVip" :key="index">
             <el-card>
+              <span class="triangle"></span>
+              <span class="num">{{index + 1}}</span>
               <img :src="user.url" alt="">
               <div class="desc">
                 <p>{{user.name}}</p>
@@ -238,6 +240,36 @@ export default class UserList extends Vue {
 <style scoped lang="less">
 @import '../../assets/less/style.less';
 .vip {
+  .el-card  {
+    position: relative;
+    .triangle {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 0;
+      height: 0;
+      border-top: 50px solid @purple;
+      border-right: 50px solid transparent;
+    }
+    .num {
+      position: absolute;
+      left: 2px;
+      top: 5px;
+      display: block;
+      width: 24px;
+      height: 24px;
+      line-height: 24px;
+      text-align: center;
+      color: #fff;
+      z-index: 100;
+      word-break: normal;
+      word-wrap: normal;
+      font: italic @font-size-base-title Impact;
+    }
+    &:hover {
+     box-shadow: @shadow-min;
+    }
+  }
   .diadema {
     margin: 0 0 16px 0;
     font-size: @font-size-slarge-title;
@@ -246,9 +278,6 @@ export default class UserList extends Vue {
   }
   .el-card /deep/ .el-card__body {
     padding: 0;
-  }
-  .el-card:hover {
-    box-shadow: @shadow-min;
   }
   img {
     display: block;

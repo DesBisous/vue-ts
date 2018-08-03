@@ -1,5 +1,22 @@
 <template>
   <div class="home">
+    <div class="content carousel">
+      <el-carousel :interval="3000" trigger="click" height="150px">
+        <el-carousel-item v-for="item in 4" :key="item">
+          <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1533300049777&di=9dc9b14a22d87d4c3a47876a2e277a8f&imgtype=jpg&src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D3518200860%2C46511204%26fm%3D214%26gp%3D0.jpg" alt="">
+        </el-carousel-item>
+      </el-carousel>
+      <div class="sun">
+        <div class="sunrise">
+          <i class="iconfont icon-ioshome"></i>
+          <span>9:00 AM</span>
+        </div>
+        <div class="sunset">
+          <i class="iconfont icon-ioshome"></i>
+          <span>6:30 PM</span>
+        </div>
+      </div>
+    </div>
     <div class="content top">
       <div class="top-img">
         <img src="../assets/logo.png">
@@ -328,7 +345,43 @@ export default class Home extends Vue {
 </script>
 <style scoped lang="less">
 @import '../assets/less/style.less';
-
+.carousel {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  .sun {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 240px;
+    z-index: 10;
+    color: #fff;
+    .sunrise {
+      background: rgba(129, 117, 199, 0.6);
+    }
+    .sunset {
+      background: rgba(39, 194, 193, 0.6);
+    }
+    .sunrise, .sunset{
+      float: right;
+      width: 120px;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      i {
+        display: block;
+        font-size: @font-size-slarge-title;
+        margin-bottom: 8px;
+      }
+      span {
+        font-size: @font-size-base-text;
+      }
+    }
+  }
+}
 .top {
   display: flex;
   align-items: center;
