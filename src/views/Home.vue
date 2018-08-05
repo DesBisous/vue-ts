@@ -7,14 +7,18 @@
         </el-carousel-item>
       </el-carousel>
       <div class="sun">
-        <div class="sunrise">
-          <i class="iconfont icon-ioshome"></i>
-          <span>9:00 AM</span>
-        </div>
         <div class="sunset">
-          <i class="iconfont icon-ioshome"></i>
+          <i class="iconfont icon-ioscloudynightoutline"></i>
           <span>6:30 PM</span>
         </div>
+        <div class="sunrise">
+          <i class="iconfont icon-androidsunny"></i>
+          <span>9:00 AM</span>
+        </div>
+      </div>
+      <div class="address">
+        <i class="el-icon-location-outline"></i>
+        <span>中国 深圳</span>
       </div>
     </div>
     <div class="content top">
@@ -349,23 +353,42 @@ export default class Home extends Vue {
   margin: 0;
   padding: 0;
   position: relative;
+  .address {
+    position: absolute;
+    left: 24px;
+    top: 20px;
+    z-index: 10;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    i {
+      font-size: @font-size-main-title;
+    }
+    span {
+      margin-left: 6px;
+      font-size: @font-size-base-text;
+    }
+  }
   .sun {
     position: absolute;
     right: 0;
     top: 0;
     height: 100%;
-    width: 240px;
+    width: 280px;
     z-index: 10;
     color: #fff;
     .sunrise {
-      background: rgba(129, 117, 199, 0.6);
+      background: rgba(39, 194, 193, 0.6);
     }
     .sunset {
-      background: rgba(39, 194, 193, 0.6);
+      i {
+        font-size: 29px!important;
+      }
+      background: rgba(129, 117, 199, 0.6);
     }
     .sunrise, .sunset{
       float: right;
-      width: 120px;
+      width: 140px;
       height: 100%;
       display: flex;
       justify-content: center;
