@@ -12,14 +12,13 @@
 
 <script lang="ts">
 import { Component, Vue, Watch} from 'vue-property-decorator';
-import { Route } from 'vue-router';
 
 @Component
 export default class Error extends Vue {
   private info?: string = '404';
 
   @Watch('$route')
-  protected routeWatch(to: Route, from: Route) {
+  protected routeWatch(to: any, from: any) {
     this.info = to.name;
   }
 }
@@ -37,7 +36,7 @@ export default class Error extends Vue {
   }
   .desc {
     position: absolute;
-    bottom: 50px;
+    bottom: 25px;
     background: #fff;
     width: 100%;
     height: 200px;
