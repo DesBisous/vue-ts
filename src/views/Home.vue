@@ -3,7 +3,7 @@
     <div class="content carousel">
       <el-carousel :interval="3000" trigger="click" height="150px">
         <el-carousel-item v-for="item in 4" :key="item">
-          <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1533300049777&di=9dc9b14a22d87d4c3a47876a2e277a8f&imgtype=jpg&src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D3518200860%2C46511204%26fm%3D214%26gp%3D0.jpg" alt="">
+          <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536062904958&di=22f9ac064ac581fad81a6c4cdf4681e1&imgtype=jpg&src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D3676720638%2C1704361608%26fm%3D214%26gp%3D0.jpg" alt="">
         </el-carousel-item>
       </el-carousel>
       <div class="sun">

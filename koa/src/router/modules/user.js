@@ -19,9 +19,9 @@ const findAllUser =  async (ctx, next) => {
 
 module.exports = [
     {
-        method: 'GET',
-        path: '/user',
-        func: user
+      method: 'GET',
+      path: '/user',
+      func: user
     },
     {
       method: 'GET',
