@@ -1,4 +1,4 @@
-import { User } from '../../mysql/models/User';
+// import { User } from '../../mysql/models/User';
 
 const user =  async (ctx, next) => {
   await next();
@@ -7,14 +7,14 @@ const user =  async (ctx, next) => {
 };
 
 const findAllUser =  async (ctx, next) => {
-  const users = await User.findAll();
-  ctx.response.status = 200;
-  ctx.response.type = 'application/json';
-  if (users) {
-    ctx.response.body = JSON.stringify(users);
-  } else {
-    ctx.response.body = '查询失败！';
-  }
+  // const users = await User.findAll();
+  // ctx.response.status = 200;
+  // ctx.response.type = 'application/json';
+  // if (users) {
+  //   ctx.response.body = JSON.stringify(users);
+  // } else {
+  //   ctx.response.body = '查询失败！';
+  // }
 };
 
 module.exports = [

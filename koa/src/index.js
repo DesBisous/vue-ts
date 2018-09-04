@@ -3,6 +3,7 @@ import logger from 'koa-logger';
 import bodyParser from 'koa-bodyparser';
 import cors from 'koa2-cors';
 import ws from 'ws';
+import webSocket from './webSocket';
 import corsConfig from './corsConfig';
 import routes from './router';
 
@@ -24,4 +25,5 @@ app.use(routes());
 
 // 在端口3000监听:
 const server = app.listen(3000);
+app.wss = webSocket(server, WebSocketServer);
 console.log('app started at port 3000...');

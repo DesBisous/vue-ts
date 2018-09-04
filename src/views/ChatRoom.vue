@@ -89,6 +89,19 @@ import { Component, Vue } from 'vue-property-decorator';
 @Component
 export default class ChatRoom extends Vue {
   private inputValue: string = '';
+
+  constructor() {
+    super();
+  }
+
+  protected mounted() {
+    console.log('欢迎来到聊天室!');
+    const ws = new WebSocket('ws://localhost:3000/ws/chat');
+    ws.onmessage = function(event) {
+      console.log(event);
+    };
+    ws.send('你好！');
+  }
 }
 </script>
 

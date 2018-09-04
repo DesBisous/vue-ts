@@ -1,5 +1,45 @@
 import url from 'url';
 
+var messageIndex = 0;
+
+function createMessage(type, user, data) {
+  messageIndex++;
+  return JSON.stringify({
+    id: messageIndex,
+    type: type,
+    user: user,
+    data: data
+  });
+}
+
+function onConnect() {
+  let user = this.user;
+  let msg = createMessage('enter', user, `${user.name} Enter Room.`);
+  this.wss.broadcast(msg);
+  // build user list:
+  let users = this.wss.clients.map(function(client) {
+    return client.user;
+  });
+  this.send(createMessage('users', user, users));
+}
+
+function onMessage(message) {
+  if (message && message.trim()) {
+    const msg = createMessage('chat', this.user, message.trim());
+    this.wss.broadcast(msg);
+  }
+}
+
+function onClose() {
+  let user = this.user;
+  let msg = createMessage('leave', user, `${user.name} Leave Room.`);
+  this.wss.broadcast(msg);
+}
+
+function onError(err) {
+  console.log('[WebSocket] error: ' + err);
+};
+
 function createWebSocketServer(server, WebSocketServer) {
   //创建WebSocketServer:
   const wss = new WebSocketServer({
@@ -11,9 +51,9 @@ function createWebSocketServer(server, WebSocketServer) {
       client.send(data);
     });
   };
-  wss.on('connection', function(ws) {
+  wss.on('connection', function(ws, req) {
     // ws.upgradeReq是一个request对象:
-    let location = url.parse(ws.upgradeReq.url, true);
+    let location = url.parse(req.url, true);
     console.log('[WebSocketServer] connection: ' + location.href);
     ws.on('message', onMessage);
     ws.on('close', onClose);
@@ -23,10 +63,18 @@ function createWebSocketServer(server, WebSocketServer) {
       // close ws:
       ws.close(4000, 'Invalid URL');
     }
+
+    // const user = ws.upgradeReq.user;
+    ws.user = {
+      id: 1,
+      name: 'Benson',
+    };
     ws.wss = wss;
     // 连接成功后的 自定义回调
-    onConnection.apply(ws);
+    onConnect.apply(ws);
   });
   console.log('WebSocketServer was attached.');
   return wss;
 }
+
+export default createWebSocketServer;
