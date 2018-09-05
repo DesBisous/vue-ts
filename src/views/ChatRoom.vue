@@ -85,22 +85,46 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { setCookie, getCookie, deleteCookie } from '../lib/cookie';
 
 @Component
 export default class ChatRoom extends Vue {
   private inputValue: string = '';
+  private ws: any = null;
 
   constructor() {
     super();
   }
 
+  protected onMessage(msg: string) {
+    console.log(event);
+  }
+
+  protected onError(code: number, msg: string) {
+    console.error('[ERROR] ' + code + ': ' + msg);
+    this.ws.close();
+  }
+
+  protected onClose(evt: {code: number, type: string}) {
+    console.warn('[CLOSED] ' + evt.code + ': ' + evt.type);
+  }
+
+  protected send(meg: {type: string, meg: string}) {
+    this.ws.send(JSON.stringify(meg));
+  }
+
   protected mounted() {
-    console.log('欢迎来到聊天室!');
-    const ws = new WebSocket('ws://localhost:3000/ws/chat');
-    ws.onmessage = function(event) {
-      console.log(event);
-    };
-    ws.send('你好！');
+    setCookie('user', JSON.stringify({id: '001', name: 'Benson'}));
+    console.log(getCookie('user'));
+    this.ws = new WebSocket('ws://localhost:3000/ws/chat');
+    this.ws.onmessage = this.onMessage;
+    this.ws.onerror = this.onError;
+    this.ws.onclose = this.onClose;
+    this.ws.onopen = () => this.send({type: 'text', meg: '进入聊天室!'});
+  }
+
+  protected destroyed() {
+    this.ws.close();
   }
 }
 </script>

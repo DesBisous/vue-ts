@@ -25,5 +25,6 @@ app.use(routes());
 
 // 在端口3000监听:
 const server = app.listen(3000);
+console.log('koa 服务启动成功!');
 app.wss = webSocket(server, WebSocketServer);
-console.log('app started at port 3000...');
+console.log('app http 服务启动成功! port: 3000...');
