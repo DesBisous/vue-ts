@@ -1,4 +1,5 @@
 import url from 'url';
+import { getCookie } from '../cookie';
 
 var messageIndex = 0;
 
@@ -6,7 +7,11 @@ function cookiesUser(req) {
   if (!req) {
     return null;
   }
-  console.log(req.headers.cookie);
+  const cookie = req.headers.cookie
+  if (!cookie) {
+    return null;
+  }
+  return JSON.parse(getCookie(cookie, 'user'));
 }
 
 // 创建消息
@@ -73,11 +78,7 @@ function createWebSocketServer(server, WebSocketServer) {
     if (location.pathname !== '/ws/chat') {
       client.close(4000, 'Invalid URL');
     }
-    cookiesUser(req);
-    client.user = {
-      id: 1,
-      name: 'Benson',
-    };
+    client.user = cookiesUser(req);
     client.wss = wss;
     // 连接成功后的 自定义回调
     onConnect.apply(client);

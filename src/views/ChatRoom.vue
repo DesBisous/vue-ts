@@ -115,7 +115,6 @@ export default class ChatRoom extends Vue {
 
   protected mounted() {
     setCookie('user', JSON.stringify({id: '001', name: 'Benson'}));
-    console.log(getCookie('user'));
     this.ws = new WebSocket('ws://localhost:3000/ws/chat');
     this.ws.onmessage = this.onMessage;
     this.ws.onerror = this.onError;

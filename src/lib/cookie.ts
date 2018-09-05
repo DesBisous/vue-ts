@@ -7,7 +7,7 @@
  * @param {String} path cookie所在的目录，默认为/，就是根目录。
  * @return {Undefined}
  */
-export function setCookie(name: string, value: string, time: string, domain: string, path: string): void {
+export function setCookie(name: string, value: string, time?: string, domain?: string, path?: string): void {
   let str = `${name}=${encodeURIComponent(value)}`;
   if (time) {
     const date = new Date(time).toUTCString();
@@ -47,7 +47,7 @@ export function getCookie(name: string): string {
  * @param  {String} path   cookie所在的目录，默认为/，就是根目录。
  * @return {undefined}        未定义
  */
-export function deleteCookie(name: string, domain: string, path: string): void {
+export function deleteCookie(name: string, domain?: string, path?: string): void {
   const date = new Date('1970/01/01');
   let str = `${name}=null;expires=${date.toUTCString()}`;
   str = domain ? `${str};domain=${domain}` : str;
