@@ -111,6 +111,7 @@ export default class UserList extends Vue {
     super();
     this.userVip = [
       {
+        id: 1,
         name: '金所炫',
         age: 19,
         email: '金所炫_KimSoHyun@weibo.com',
@@ -118,6 +119,7 @@ export default class UserList extends Vue {
         url: require('../../../public/images/user.jpg'),
       },
       {
+        id: 1,
         name: '李光洙',
         age: 34,
         email: 'Lee Kwang Soo@weibo.com',
@@ -125,6 +127,7 @@ export default class UserList extends Vue {
         url: require('../../../public/images/user.jpg'),
       },
       {
+        id: 1,
         name: '朴宝英',
         age: 29,
         email: 'Park BoYoung@weibo.com',
@@ -132,6 +135,7 @@ export default class UserList extends Vue {
         url: require('../../../public/images/user.jpg'),
       },
       {
+        id: 1,
         name: '林娜琏',
         age: 23,
         email: '金所炫_Lim Na Yeon@weibo.com',
@@ -141,6 +145,7 @@ export default class UserList extends Vue {
     ];
     this.users = [
       {
+        id: 1,
         name: '金所炫',
         age: 19,
         email: '金所炫_KimSoHyun@weibo.com',
@@ -148,6 +153,7 @@ export default class UserList extends Vue {
         url: require('../../../public/images/user.jpg'),
       },
       {
+        id: 1,
         name: '李光洙',
         age: 34,
         email: 'Lee Kwang Soo@weibo.com',
@@ -155,6 +161,7 @@ export default class UserList extends Vue {
         url: require('../../../public/images/user.jpg'),
       },
       {
+        id: 1,
         name: '朴宝英',
         age: 29,
         email: 'Park BoYoung@weibo.com',
@@ -162,6 +169,7 @@ export default class UserList extends Vue {
         url: require('../../../public/images/user.jpg'),
       },
       {
+        id: 1,
         name: '林娜琏',
         age: 23,
         email: '金所炫_Lim Na Yeon@weibo.com',
@@ -169,6 +177,7 @@ export default class UserList extends Vue {
         url: require('../../../public/images/user.jpg'),
       },
       {
+        id: 1,
         name: '金所炫',
         age: 19,
         email: '金所炫_KimSoHyun@weibo.com',
@@ -176,6 +185,7 @@ export default class UserList extends Vue {
         url: require('../../../public/images/user.jpg'),
       },
       {
+        id: 1,
         name: '李光洙',
         age: 34,
         email: 'Lee Kwang Soo@weibo.com',
@@ -183,6 +193,7 @@ export default class UserList extends Vue {
         url: require('../../../public/images/user.jpg'),
       },
       {
+        id: 1,
         name: '朴宝英',
         age: 29,
         email: 'Park BoYoung@weibo.com',
@@ -190,6 +201,7 @@ export default class UserList extends Vue {
         url: require('../../../public/images/user.jpg'),
       },
       {
+        id: 1,
         name: '林娜琏',
         age: 23,
         email: '金所炫_Lim Na Yeon@weibo.com',
@@ -197,6 +209,7 @@ export default class UserList extends Vue {
         url: require('../../../public/images/user.jpg'),
       },
       {
+        id: 1,
         name: '金所炫',
         age: 19,
         email: '金所炫_KimSoHyun@weibo.com',
@@ -204,6 +217,7 @@ export default class UserList extends Vue {
         url: require('../../../public/images/user.jpg'),
       },
       {
+        id: 1,
         name: '李光洙',
         age: 34,
         email: 'Lee Kwang Soo@weibo.com',
@@ -211,6 +225,7 @@ export default class UserList extends Vue {
         url: require('../../../public/images/user.jpg'),
       },
       {
+        id: 1,
         name: '朴宝英',
         age: 29,
         email: 'Park BoYoung@weibo.com',
@@ -218,6 +233,7 @@ export default class UserList extends Vue {
         url: require('../../../public/images/user.jpg'),
       },
       {
+        id: 1,
         name: '林娜琏',
         age: 23,
         email: '金所炫_Lim Na Yeon@weibo.com',

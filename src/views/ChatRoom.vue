@@ -73,6 +73,10 @@
                    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1533300049777&di=9dc9b14a22d87d4c3a47876a2e277a8f&imgtype=jpg&src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D3518200860%2C46511204%26fm%3D214%26gp%3D0.jpg" alt="">
                    <p class="name">V 帅</p>
                  </div>
+                 <div class="chatItem users" v-for="(item, index) in users" :key="index">
+                   <img src="../../public/images/liguangzhu.jpg" alt="">
+                   <p class="name">{{item.name}}</p>
+                 </div>
                </div>
              </div>
            </div>
@@ -86,21 +90,45 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { setCookie, getCookie, deleteCookie } from '../lib/cookie';
+import User from '../interface/user';
+import Chat from '../interface/chat';
 
 @Component
 export default class ChatRoom extends Vue {
   private inputValue: string = '';
   private ws: any = null;
+  private users: User[] = [];
+  private chats: Chat[] = [];
 
   constructor() {
     super();
   }
 
-  protected onMessage(msg: string) {
-    console.log(event);
+  protected onMessage(event: any) {
+    const chatInfo = JSON.parse(event.data);
+    const type = chatInfo.type;
+    if (type === 'users') {
+      this.users = chatInfo.data.meg;
+      console.log(this.users);
+    } else {
+      const chat: Chat = {
+        id: chatInfo.id,
+        type: chatInfo.type,
+        user: chatInfo.user,
+      };
+      switch (chatInfo.type) {
+        case 'enter': chat.data = chatInfo.data.meg; break;
+        case 'leave': chat.data = chatInfo.data.meg; break;
+        case 'chat': chat.data = chatInfo.data; break;
+        default: break;
+      }
+      this.chats.push(chat);
+      console.log(this.chats);
+    }
   }
 
   protected onError(code: number, msg: string) {
+    this.$message.error('[ERROR] ' + code + ': ' + msg);
     console.error('[ERROR] ' + code + ': ' + msg);
     this.ws.close();
   }
@@ -114,12 +142,21 @@ export default class ChatRoom extends Vue {
   }
 
   protected mounted() {
-    setCookie('user', JSON.stringify({id: '001', name: 'Benson'}));
-    this.ws = new WebSocket('ws://localhost:3000/ws/chat');
-    this.ws.onmessage = this.onMessage;
-    this.ws.onerror = this.onError;
-    this.ws.onclose = this.onClose;
-    this.ws.onopen = () => this.send({type: 'text', meg: '进入聊天室!'});
+    if (Object.keys(this.$route.query).length <= 0) {
+      this.$message.error('请您先登录，谢谢~');
+      return;
+    } else {
+      const user = {
+        id: this.$route.query.id,
+        name: this.$route.query.name,
+      };
+      setCookie('user', JSON.stringify(user));
+      this.ws = new WebSocket('ws://localhost:3000/ws/chat');
+      this.ws.onmessage = this.onMessage;
+      this.ws.onerror = this.onError;
+      this.ws.onclose = this.onClose;
+      this.ws.onopen = () => this.send({type: 'text', meg: '进入聊天室!'});
+    }
   }
 
   protected destroyed() {

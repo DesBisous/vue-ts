@@ -3,6 +3,16 @@ import { getCookie } from '../cookie';
 
 var messageIndex = 0;
 
+// 广播当前 webSocket 连接用户
+function broadcastUsers(wss, user) {
+  // this.wss.clients 返回的是 Set 对象 可以使用 forEach 遍历或者使用 Array.from 将Set 转化为 Array
+  let users = Array.from(wss.clients).map(function(client) {
+    return client.user;
+  });
+  wss.broadcast(createMessage('users', user, {type: 'list', meg: users}));
+}
+
+// 从 cookie 中获取 user
 function cookiesUser(req) {
   if (!req) {
     return null;
@@ -30,11 +40,7 @@ function onConnect() {
   let user = this.user;
   let msg = createMessage('enter', user, {type: 'text', meg: `${user.name} Enter Room.`});
   this.wss.broadcast(msg);
-  // this.wss.clients 返回的是 Set 对象 可以使用 forEach 遍历或者使用 Array.from 将Set 转化为 Array
-  let users = Array.from(this.wss.clients).map(function(client) {
-    return client.user;
-  });
-  this.send(createMessage('users', user, {type: 'text', meg: users}));
+  broadcastUsers(this.wss, user);
 }
 
 // 监听客户端消息
@@ -50,6 +56,7 @@ function onClose() {
   let user = this.user;
   let msg = createMessage('leave', user, `${user.name} Leave Room.`);
   this.wss.broadcast(msg); // 当某一个 client 关闭 webSocket 的时候， 广播给其他所有 client
+  broadcastUsers(this.wss, user);
 }
 
 // webSocket 连接异常
