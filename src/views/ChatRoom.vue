@@ -1,89 +1,61 @@
 <template lang="html">
   <div class="chatRoom">
-   <div class="content">
-     <div class="skillStack">
-       <p>技术栈：Vue、TypeScript、Npm、NodeJs、Koa2、Less、WebSocket</p>
-     </div>
-     <div class="chatRoomMain">
-       <el-row :gutter="20">
-         <el-col :span="18">
-           <div class="frame">
-             <div class="head">
-               <i class="iconfont icon-androiddrafts"></i>
-               聊天室
-             </div>
-             <div class="body">
-               <div class="inr">
-                 <div class="chatItem">
-                   <img src="../../public/images/user.jpg" alt="">
-                   <p class="name">金所炫</p>
-                   <p class="chat">你喜欢我？</p>
-                 </div>
-                 <div class="chatItem">
-                   <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1533300049777&di=9dc9b14a22d87d4c3a47876a2e277a8f&imgtype=jpg&src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D3518200860%2C46511204%26fm%3D214%26gp%3D0.jpg" alt="">
-                   <p class="name">V 帅</p>
-                   <p class="chat">不可能的事！</p>
-                 </div>
-                 <div class="chatItem">
-                   <img src="../../public/images/user.jpg" alt="">
-                   <p class="name">金所炫</p>
-                   <p class="chat">你..你...</p>
-                 </div>
-                 <div class="chatItem">
-                   <img src="../../public/images/liguangzhu.jpg" alt="">
-                   <p class="name">李光洙</p>
-                   <p class="chat">要不，喜欢我怎么样？</p>
-                 </div>
-                 <div class="chatItem">
-                   <img src="../../public/images/user.jpg" alt="">
-                   <p class="name">金所炫</p>
-                   <p class="chat">额...</p>
-                 </div>
-                 <div class="chatItem">
-                   <img src="../../public/images/user.jpg" alt="">
-                   <p class="name">金所炫</p>
-                   <p class="chat">你洗洗睡吧，哥</p>
-                 </div>
-               </div>
-               <div class="inputBlock">
-                 <el-input placeholder="请输入内容" v-model="inputValue">
-                   <el-button type="primary" slot="append" circle>发送</el-button>
-                 </el-input>
-               </div>
-             </div>
-           </div>
-         </el-col>
-         <el-col :span="6">
-           <div class="frame">
-             <div class="head">
-               <i class="iconfont icon-androidcontacts"></i>
-               在线人员
-             </div>
-             <div class="body userBody">
-               <div class="inr">
-                 <div class="chatItem users">
-                   <img src="../../public/images/user.jpg" alt="">
-                   <p class="name">金所炫</p>
-                 </div>
-                 <div class="chatItem users">
-                   <img src="../../public/images/liguangzhu.jpg" alt="">
-                   <p class="name">李光洙</p>
-                 </div>
-                 <div class="chatItem users">
-                   <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1533300049777&di=9dc9b14a22d87d4c3a47876a2e277a8f&imgtype=jpg&src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D3518200860%2C46511204%26fm%3D214%26gp%3D0.jpg" alt="">
-                   <p class="name">V 帅</p>
-                 </div>
-                 <div class="chatItem users" v-for="(item, index) in users" :key="index">
-                   <img src="../../public/images/liguangzhu.jpg" alt="">
-                   <p class="name">{{item.name}}</p>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </el-col>
-       </el-row>
-     </div>
-   </div>
+  <div class="content">
+    <div class="skillStack">
+      <p>技术栈：Vue、TypeScript、Npm、NodeJs、Koa2、Less、WebSocket</p>
+    </div>
+    <div class="chatRoomMain">
+      <el-row :gutter="20">
+        <el-col :span="18">
+          <div class="frame">
+            <div class="head">
+              <i class="iconfont icon-androiddrafts"></i>
+              聊天室
+            </div>
+            <div class="body">
+             <div class="inr">
+                <template v-for="item in chats">
+                  <template v-if="item.type !== 'chat'">
+                    <div class="chatInfo" :key="item.id">
+                      {{item.data}}
+                    </div>
+                  </template>
+                  <template v-else>
+                    <div class="chatItem" :key="item.id">
+                      <img :src="item.user.url" alt="">
+                      <p class="name">{{item.user.name}}</p>
+                      <p class="chat">{{item.data.meg}}</p>
+                    </div>
+                  </template>
+                </template>
+              </div>
+              <div class="inputBlock">
+                <el-input placeholder="请输入内容" v-model="inputValue">
+                  <el-button type="primary" slot="append" circle>发送</el-button>
+                </el-input>
+              </div>
+            </div>
+          </div>
+        </el-col>
+        <el-col :span="6">
+          <div class="frame">
+            <div class="head">
+              <i class="iconfont icon-androidcontacts"></i>
+              在线人员
+            </div>
+            <div class="body userBody">
+              <div class="inr">
+                <div class="chatItem users" v-for="(item, index) in users" :key="index">
+                  <img :src="item.url" alt="">
+                  <p class="name">{{item.name}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </el-col>
+      </el-row>
+    </div>
+  </div>
   </div>
 </template>
 
@@ -112,9 +84,9 @@ export default class ChatRoom extends Vue {
       console.log(this.users);
     } else {
       const chat: Chat = {
-        id: chatInfo.id,
-        type: chatInfo.type,
-        user: chatInfo.user,
+        id: chatInfo.id, // 信息 id
+        type: chatInfo.type, // 信息 type
+        user: chatInfo.user, // 信息来自 user
       };
       switch (chatInfo.type) {
         case 'enter': chat.data = chatInfo.data.meg; break;
@@ -149,13 +121,19 @@ export default class ChatRoom extends Vue {
       const user = {
         id: this.$route.query.id,
         name: this.$route.query.name,
+        url: '../../public/images/default.jpg',
       };
+      switch (user.name) {
+        case '金所炫': user.url = require('../../public/images/user.jpg'); break;
+        case '李光洙': user.url = require('../../public/images/liguangzhu.jpg'); break;
+        case '刘在石': user.url = require('../../public/images/liuzaishi.jpg'); break;
+      }
       setCookie('user', JSON.stringify(user));
       this.ws = new WebSocket('ws://localhost:3000/ws/chat');
       this.ws.onmessage = this.onMessage;
       this.ws.onerror = this.onError;
       this.ws.onclose = this.onClose;
-      this.ws.onopen = () => this.send({type: 'text', meg: '进入聊天室!'});
+      this.ws.onopen = () => this.send({type: 'text', meg: 'Hello 大家好~'});
     }
   }
 

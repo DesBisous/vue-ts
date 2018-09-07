@@ -38,7 +38,7 @@ function createMessage(type, user, data) {
 // 连接后回调
 function onConnect() {
   let user = this.user;
-  let msg = createMessage('enter', user, {type: 'text', meg: `${user.name} Enter Room.`});
+  let msg = createMessage('enter', user, {type: 'text', meg: `${user.name} 进入聊天室~.`});
   this.wss.broadcast(msg);
   broadcastUsers(this.wss, user);
 }
@@ -54,7 +54,7 @@ function onMessage(message) {
 // 客户端关闭 webSocket
 function onClose() {
   let user = this.user;
-  let msg = createMessage('leave', user, `${user.name} Leave Room.`);
+  let msg = createMessage('leave', user, {type: 'text', meg: `${user.name} 离开聊天室~.`});
   this.wss.broadcast(msg); // 当某一个 client 关闭 webSocket 的时候， 广播给其他所有 client
   broadcastUsers(this.wss, user);
 }
