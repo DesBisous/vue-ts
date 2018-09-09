@@ -73,7 +73,10 @@ function createWebSocketServer(server, WebSocketServer) {
   // 聊天功能：在接收到信息后，将消息广播发送到 webSocket 所有绑定的 client
   wss.broadcast = function broadcast(data) {
     wss.clients.forEach(function each(client) {
-      client.send(data);
+      console.log(client.readyState);
+      if (client.readyState === 1) {
+        client.send(data);
+      }
     });
   };
   wss.on('connection', function(client, req) {

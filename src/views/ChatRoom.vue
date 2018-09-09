@@ -13,7 +13,7 @@
               聊天室
             </div>
             <div class="body">
-             <div class="inr">
+             <div class="inr" ref="scroll">
                 <template v-for="item in chats">
                   <template v-if="item.type !== 'chat'">
                     <div class="chatInfo" :key="item.id">
@@ -30,8 +30,8 @@
                 </template>
               </div>
               <div class="inputBlock">
-                <el-input placeholder="请输入内容" v-model="inputValue">
-                  <el-button type="primary" slot="append" circle>发送</el-button>
+                <el-input placeholder="请输入内容" v-model="inputValue" @keyup.enter.native="megSend">
+                  <el-button type="primary" slot="append" circle @click="megSend">发送</el-button>
                 </el-input>
               </div>
             </div>
@@ -81,7 +81,7 @@ export default class ChatRoom extends Vue {
     const type = chatInfo.type;
     if (type === 'users') {
       this.users = chatInfo.data.meg;
-      console.log(this.users);
+      // console.log(this.users);
     } else {
       const chat: Chat = {
         id: chatInfo.id, // 信息 id
@@ -95,7 +95,11 @@ export default class ChatRoom extends Vue {
         default: break;
       }
       this.chats.push(chat);
-      console.log(this.chats);
+      this.$nextTick(() => {
+        const scroll = this.$refs.scroll as HTMLDivElement;
+        scroll.scrollTop = scroll.scrollHeight;
+      });
+      // console.log(this.chats);
     }
   }
 
@@ -111,6 +115,15 @@ export default class ChatRoom extends Vue {
 
   protected send(meg: {type: string, meg: string}) {
     this.ws.send(JSON.stringify(meg));
+  }
+
+  protected megSend() {
+    const meg = {
+      type: 'text',
+      meg: this.inputValue,
+    };
+    this.inputValue = '';
+    this.send(meg);
   }
 
   protected mounted() {
@@ -138,7 +151,9 @@ export default class ChatRoom extends Vue {
   }
 
   protected destroyed() {
-    this.ws.close();
+    if (this.ws) {
+      this.ws.close();
+    }
   }
 }
 </script>
@@ -176,6 +191,7 @@ export default class ChatRoom extends Vue {
     margin: 0;
     font-size: @font-size-base-text;
     color: @font-color-base;
+    padding-right: 30%;
   }
   margin-top: 24px;
   .frame {
@@ -215,6 +231,12 @@ export default class ChatRoom extends Vue {
             font-size: @font-size-base-text;
           }
         }
+      }
+      .chatInfo {
+        font-size: @font-size-min-text;
+        color: #888;
+        text-align: center;
+        margin-bottom: 8px;
       }
       .inputBlock {
         position: absolute;
