@@ -4,7 +4,9 @@
     <div class="right-block">
       <div class="chat">
         <el-tooltip effect="dark" content="聊天" placement="bottom">
-          <i class="iconfont icon-androidchat"></i>
+          <router-link :to="{ path: '/chatRoom' }">
+            <i class="iconfont icon-androidchat"></i>
+          </router-link>
         </el-tooltip>
       </div>
       <div class="message">
@@ -23,10 +25,12 @@
               <i class="iconfont icon-androidcontact"></i>
               个人中心
             </el-dropdown-item>
-            <el-dropdown-item>
-              <i class="iconfont icon-androidchat"></i>
-              聊天室
-            </el-dropdown-item>
+            <router-link :to="{ path: '/chatRoom' }">
+              <el-dropdown-item>
+                  <i class="iconfont icon-androidchat"></i>
+                聊天室
+              </el-dropdown-item>
+            </router-link>
             <el-dropdown-item>
               邮件
             </el-dropdown-item>
@@ -123,6 +127,9 @@ export default class TopBar extends Vue {
     }
   }
   .chat {
+    a {
+      color: @font-color-base;
+    }
     .top-item;
     i {
       font-size: @font-size-main-title;
