@@ -6,7 +6,7 @@ import sideBar from './modules/sideBar';
 
 Vue.use(Vuex);
 
-const debug: boolean = process.env.NODE_ENV !== 'production';
+const debug: boolean = process.env.NODE_ENV === 'development';
 
 export default new Vuex.Store({
   modules: {

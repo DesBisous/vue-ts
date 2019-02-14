@@ -64,7 +64,7 @@ module.exports = {
 
   // configure webpack-dev-server behavior
   devServer: {
-    open: process.platform === 'darwin',
+    open: true, // 可以 process.platform === 'darwin'
     disableHostCheck: false,
     host: '0.0.0.0',
     port: 8080,

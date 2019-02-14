@@ -1,18 +1,10 @@
 import axios, { AxiosResponse, AxiosRequestConfig, AxiosError } from 'axios';
-import qs from 'qs';
 import router from '@/router';
-
-export const getToken = () => {
-  const token = window.localStorage.token;
-  if (token) {
-    return token;
-  }
-  return null;
-};
+import { getToken, removeToken } from '@/lib/storage';
 
 // 全局配置
-axios.defaults.timeout = 3000;
-axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? 'http://127.0.0.0:3000/' : 'http://localhost:3000/';
+axios.defaults.timeout = 5000;
+axios.defaults.baseURL = process.env.BASE_URL;
 axios.defaults.headers.post['Accept'] = 'application/json;charset=UTF-8';
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 
@@ -21,9 +13,6 @@ axios.interceptors.request.use(
   (config: AxiosRequestConfig) => {
     if (getToken()) {
       config.headers['X-User-Token'] = getToken();
-    }
-    if (config.method  === 'post') {
-      config.data = qs.stringify(config.data);
     }
     return config;
   },
@@ -43,7 +32,7 @@ axios.interceptors.response.use(
       switch (err.response.status) {
         case 401:
           // 401 清除token信息并跳转到登录页面
-          window.localStorage.removeItem('token');
+          removeToken();
           break;
         default: break;
       }
