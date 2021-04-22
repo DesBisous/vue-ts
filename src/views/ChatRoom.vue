@@ -21,12 +21,12 @@
                     </div>
                   </template>
                   <template v-else>
-                    <div class="chatItem" :key="item.id">
-                      <img :src="item.user.url" alt="">
-                      <p class="name">{{item.user.name}}</p>
-                      <p class="chat">{{item.data.meg}}</p>
-                    </div>
-                  </template>
+  <div class="chatItem" :key="item.id">
+    <img :src="item.user.url" alt />
+    <p class="name">{{item.user.name}}</p>
+    <p class="chat">{{item.data.meg}}</p>
+  </div>
+</template>
                 </template>
               </div>
               <div class="inputBlock">
@@ -89,10 +89,17 @@ export default class ChatRoom extends Vue {
         user: chatInfo.user, // 信息来自 user
       };
       switch (chatInfo.type) {
-        case 'enter': chat.data = chatInfo.data.meg; break;
-        case 'leave': chat.data = chatInfo.data.meg; break;
-        case 'chat': chat.data = chatInfo.data; break;
-        default: break;
+        case 'enter':
+          chat.data = chatInfo.data.meg;
+          break;
+        case 'leave':
+          chat.data = chatInfo.data.meg;
+          break;
+        case 'chat':
+          chat.data = chatInfo.data;
+          break;
+        default:
+          break;
       }
       this.chats.push(chat);
       this.$nextTick(() => {
@@ -109,11 +116,11 @@ export default class ChatRoom extends Vue {
     this.ws.close();
   }
 
-  protected onClose(evt: {code: number, type: string}) {
+  protected onClose(evt: { code: number; type: string }) {
     console.warn('[CLOSED] ' + evt.code + ': ' + evt.type);
   }
 
-  protected send(meg: {type: string, meg: string}) {
+  protected send(meg: { type: string; meg: string }) {
     this.ws.send(JSON.stringify(meg));
   }
 
@@ -137,16 +144,22 @@ export default class ChatRoom extends Vue {
         url: '../../public/images/default.jpg',
       };
       switch (user.name) {
-        case '金所炫': user.url = require('../../public/images/user.jpg'); break;
-        case '李光洙': user.url = require('../../public/images/liguangzhu.jpg'); break;
-        case '刘在石': user.url = require('../../public/images/liuzaishi.jpg'); break;
+        case '金所炫':
+          user.url = require('../../public/images/user.jpg');
+          break;
+        case '李光洙':
+          user.url = require('../../public/images/liguangzhu.jpg');
+          break;
+        case '刘在石':
+          user.url = require('../../public/images/liuzaishi.jpg');
+          break;
       }
       setCookie('user', JSON.stringify(user));
       this.ws = new WebSocket('ws://localhost:3000/ws/chat');
       this.ws.onmessage = this.onMessage;
       this.ws.onerror = this.onError;
       this.ws.onclose = this.onClose;
-      this.ws.onopen = () => this.send({type: 'text', meg: 'Hello 大家好~'});
+      this.ws.onopen = () => this.send({ type: 'text', meg: 'Hello 大家好~' });
     }
   }
 
@@ -159,7 +172,7 @@ export default class ChatRoom extends Vue {
 </script>
 
 <style lang="less">
-@import '../assets/less/style.less';
+@import "../assets/less/style.less";
 
 .chatRoom {
   font-family: @Comic-Sans-MS;
