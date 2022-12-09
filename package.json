@@ -16,7 +16,7 @@
     "axios": "^0.18.0",
     "echarts": "^4.1.0",
     "element-ui": "^2.4.3",
-    "qs": "^6.5.2",
+    "qs": "^6.5.3",
     "vue": "^2.5.16",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^6.0.0",
